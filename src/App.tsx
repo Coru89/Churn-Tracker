@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginForm from './components/LoginForm';
 // import firebase from './firebase/firebaseConfig';
+// import { BrowserRouter as Router } from 'react-dom';
 
 class App extends Component {
     state = {
@@ -10,12 +11,12 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
+            <React.Fragment>
                 <LoginForm
                     email={this.state.email}
                     password={this.state.password}
                 />
-            </div>
+            </React.Fragment>
         );
     }
 }
