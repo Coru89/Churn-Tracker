@@ -6,7 +6,7 @@ interface Iprops {
     password: string;
 }
 
-class LoginForm extends Component<Iprops> {
+class LogInPage extends Component<Iprops> {
     login = (email: string, password: string) => { };
 
     render() {
@@ -31,4 +31,4 @@ class LoginForm extends Component<Iprops> {
     }
 }
 
-export default LoginForm;
+export default LogInPage;
