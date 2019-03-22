@@ -10,5 +10,5 @@ export interface ISignUpFormProps {
 }
 
 export interface ISignUpError {
-    message?: string;
+    message: string;
 }

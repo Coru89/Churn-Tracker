@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FirebaseContext, Firebase } from '../Firebase';
 
-import { ISignUpFormProps } from '.';
+import { ISignUpFormProps, ISignUpError } from '.';
 
 class SignUpForm extends Component<ISignUpFormProps> {
     constructor(props: ISignUpFormProps) {
@@ -14,7 +14,10 @@ class SignUpForm extends Component<ISignUpFormProps> {
         email: '',
         password: '',
         password2: '',
-        error: null,
+        error: {
+            code: '',
+            message: '',
+        },
     };
 
     onChange = (e: any) => {
@@ -31,7 +34,7 @@ class SignUpForm extends Component<ISignUpFormProps> {
                 this.setState({ ...this.state });
             })
             .catch((error: any) => {
-                alert(error);
+                console.log(error);
                 this.setState({ error });
             });
 
@@ -90,7 +93,9 @@ class SignUpForm extends Component<ISignUpFormProps> {
                     Sign Up
                 </button>
 
-                {this.props.error && <p>{this.props.error.message}</p>}
+                {!this.state.error.message ? null : (
+                    <p>Error: {this.state.error.message}</p>
+                )}
             </form>
         );
     }
