@@ -1,3 +1,3 @@
 export interface INavigationProps {
-    authuser: object;
+    authUser: object | null;
 }

@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { INavigationProps } from '.';
+import { AuthUserContext } from '../Session';
 
-// how do i use the I NavigationProps so I don't have to set authUser as any?
-const Navigation = ({ authUser }: any) => (
-    <div>{!authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
+const Navigation = () => (
+    <div>
+        <AuthUserContext.Consumer>
+            {authUser =>
+                authUser ? <NavigationAuth /> : <NavigationNonAuth />
+            }
+        </AuthUserContext.Consumer>
+    </div>
 );
 
 const NavigationAuth = () => (
