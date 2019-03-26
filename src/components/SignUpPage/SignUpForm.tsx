@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import { FirebaseContext, Firebase } from '../Firebase';
+import { withRouter } from 'react-router-dom';
+// import { compose } from 'recompose';
 
-import { ISignUpFormProps, ISignUpError } from '.';
+import { withFirebase } from '../Firebase';
+import * as ROUTES from '../../constants/routes';
+import { ISignUpFormProps } from '.';
 
-class SignUpForm extends Component<ISignUpFormProps> {
-    constructor(props: ISignUpFormProps) {
-        super(props);
-    }
+class SignUpFormBase extends Component<ISignUpFormProps> {
+    // DO I NEED THIS?
+    // constructor(props: ISignUpFormProps) {
+    //     super(props);
+    // }
 
     // init state
     state = {
@@ -25,6 +29,9 @@ class SignUpForm extends Component<ISignUpFormProps> {
     };
 
     onSubmit = (e: any) => {
+        console.log(this.state.email);
+        console.log(this.state.password);
+
         this.props.firebase.auth
             .createUserWithEmailAndPassword(
                 this.state.email,
@@ -32,6 +39,7 @@ class SignUpForm extends Component<ISignUpFormProps> {
             )
             .then(() => {
                 this.setState({ ...this.state });
+                this.props.history.push(ROUTES.HOME);
             })
             .catch((error: any) => {
                 console.log(error);
@@ -100,5 +108,17 @@ class SignUpForm extends Component<ISignUpFormProps> {
         );
     }
 }
+
+// using the higher-order Firebase Context Componenet to wrap the SignUpForm
+// using the withRouter higher order componenet from react-router-dom
+// this gives us access to the router props (like history)
+
+const SignUpForm = withRouter(withFirebase(SignUpFormBase));
+
+// using recompose to organize higher-order components ***(not working with TS)***
+// const SignUpForm = compose(
+//     withRouter,
+//     withFirebase,
+// )(SignUpFormBase);
 
 export { SignUpForm };

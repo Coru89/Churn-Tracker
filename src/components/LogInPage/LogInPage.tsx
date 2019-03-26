@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { LogInForm } from '.';
 import { SignUpLink } from '../SignUpPage';
-// import Firebase from '../firebase/firebaseConfig';
 
 class LogInPage extends Component {
     render() {
