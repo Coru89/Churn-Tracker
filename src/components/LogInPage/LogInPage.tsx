@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { LogInForm } from '.';
 import { SignUpLink } from '../SignUpPage';
+import { PasswordForgetLink } from '../PasswordForgetPage';
 
 class LogInPage extends Component {
     render() {
@@ -19,6 +20,7 @@ class LogInPage extends Component {
                 }}
             >
                 <LogInForm />
+                <PasswordForgetLink />
                 <SignUpLink />
             </div>
         );

@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 
-export class HomePage extends Component {
+import { withAuthorization } from '../Session';
+
+export class HomePage extends Component<any> {
+    constructor(props: any) {
+        super(props);
+    }
+
     render() {
-        return <div />;
+        return this.props.authUser ? (
+            <h1>This should be a protected route</h1>
+        ) : null;
     }
 }
 
-export default HomePage;
+const condition = (authUser: any) => !!authUser;
+
+export default withAuthorization(condition)(HomePage);

@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class PasswordForgetPage extends Component {
-    render() {
-        return <div />;
-    }
-}
+import { PasswordForgetForm } from '.';
+
+const PasswordForgetPage = () => (
+    <div>
+        <h1>PasswordForget</h1>
+        <PasswordForgetForm />
+    </div>
+);
 
 export default PasswordForgetPage;

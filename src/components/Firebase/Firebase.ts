@@ -17,7 +17,7 @@ const config = {
 };
 
 class Firebase {
-    auth: app.auth.Auth;
+    auth: IFirebaseAuth['auth'];
 
     constructor() {
         app.initializeApp(config);
@@ -36,13 +36,14 @@ class Firebase {
         this.auth.signOut();
     };
 
-    passwordReset = (email: IFirebaseEmail) => {
-        this.auth.sendPasswordResetEmail(email.email);
+    passwordReset = (email: IFirebaseEmail['email']) => {
+        this.auth.sendPasswordResetEmail(email);
     };
 
-    passwordUpdate = (creds: IFirebasePassword) => {
+    passwordUpdate = (password: IFirebasePassword['password']) => {
+        alert(this.auth.currentUser);
         if (this.auth.currentUser) {
-            this.auth.currentUser.updatePassword(creds.password);
+            this.auth.currentUser.updatePassword(password);
         }
     };
 }
