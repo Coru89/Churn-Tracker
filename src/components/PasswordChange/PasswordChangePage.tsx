@@ -6,4 +6,4 @@ const PasswordChangePage = () => {
     return <PasswordChangeForm />;
 };
 
-export default PasswordChangePage;
+export { PasswordChangePage };

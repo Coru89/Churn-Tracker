@@ -1,8 +1,9 @@
 import app from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 import {
     IFirebaseCredentials,
-    IFirebaseAuth,
+    IFirebase,
     IFirebasePassword,
     IFirebaseEmail,
 } from '.';
@@ -17,12 +18,17 @@ const config = {
 };
 
 class Firebase {
-    auth: IFirebaseAuth['auth'];
+    auth: IFirebase['auth'];
+    db: IFirebase['db'];
 
     constructor() {
         app.initializeApp(config);
+
         this.auth = app.auth();
+        this.db = app.database();
     }
+
+    // *** Authentication API ***
 
     createUserWithEmailAndPassword = (creds: IFirebaseCredentials) => {
         this.auth.createUserWithEmailAndPassword(creds.email, creds.password);
@@ -41,11 +47,20 @@ class Firebase {
     };
 
     passwordUpdate = (password: IFirebasePassword['password']) => {
-        alert(this.auth.currentUser);
-        if (this.auth.currentUser) {
-            this.auth.currentUser.updatePassword(password);
+        const user = this.auth.currentUser;
+
+        if (user) {
+            user.updatePassword(password);
         }
     };
+
+    // *** User API ***
+
+    // get a reference of a user based on UID
+    user = (uid: string) => this.db.ref(`users/${uid}`);
+
+    // get a reference of all users
+    users = () => this.db.ref('users');
 }
 
 export default Firebase;

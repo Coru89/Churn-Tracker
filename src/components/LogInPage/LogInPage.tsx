@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { LogInForm } from '.';
 import { SignUpLink } from '../SignUpPage';
-import { PasswordForgetLink } from '../PasswordForgetPage';
+import { PasswordForgetLink } from '../PasswordForget';
 
 class LogInPage extends Component {
     render() {

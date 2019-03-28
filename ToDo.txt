@@ -1,0 +1,5 @@
+ToDo
+
+-Implement environment variables for sensitive info/environment info
+-fork into boiler plate
+-try to make the higher order functions TS friendly

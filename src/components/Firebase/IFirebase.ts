@@ -14,6 +14,7 @@ export interface IFirebaseEmail {
     email: string;
 }
 
-export interface IFirebaseAuth {
+export interface IFirebase {
     auth: app.auth.Auth;
+    db: app.database.Database;
 }

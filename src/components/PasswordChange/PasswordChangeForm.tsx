@@ -18,13 +18,15 @@ class PasswordChangeForm extends Component<any> {
     onSubmit = (e: any) => {
         // const { password } = this.state;
 
-        this.props.firebase.auth
+        this.props.firebase
             .passwordUpdate(this.state.password)
             .then(() => {
                 this.setState({ ...this.state });
             })
             .catch((error: object) => {
+                alert(error);
                 this.setState({ error });
+                console.log(error);
             });
 
         e.preventDefault();
@@ -42,14 +44,14 @@ class PasswordChangeForm extends Component<any> {
         return (
             <form onSubmit={this.onSubmit}>
                 <input
-                    name="passwordOne"
+                    name="password"
                     value={password}
                     onChange={this.onChange}
                     type="password"
                     placeholder="New Password"
                 />
                 <input
-                    name="passwordTwo"
+                    name="password2"
                     value={password2}
                     onChange={this.onChange}
                     type="password"
