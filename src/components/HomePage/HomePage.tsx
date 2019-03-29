@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import CardList from '../CardList/CardList';
+
 import { withAuthorization } from '../Session';
 
 export class HomePage extends Component<any> {
@@ -8,9 +10,7 @@ export class HomePage extends Component<any> {
     }
 
     render() {
-        return this.props.authUser ? (
-            <h1>This should be a protected route</h1>
-        ) : null;
+        return this.props.authUser ? <CardList /> : null;
     }
 }
 
