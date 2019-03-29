@@ -1,0 +1,1 @@
+init state. state = {} vs this.state {} inside of the constructor

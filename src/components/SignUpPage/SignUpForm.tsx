@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import { ISignUpFormProps } from '.';
+import { string } from 'prop-types';
 
 class SignUpFormBase extends Component<ISignUpFormProps> {
     // DO I NEED THIS?
@@ -29,14 +30,18 @@ class SignUpFormBase extends Component<ISignUpFormProps> {
     };
 
     onSubmit = (e: any) => {
-        console.log(this.state.email);
-        console.log(this.state.password);
-
         this.props.firebase.auth
             .createUserWithEmailAndPassword(
                 this.state.email,
                 this.state.password,
             )
+            .then((authUser: any) => {
+                // Create a user in your Firebase realtime database
+                return this.props.firebase.user(authUser.user.uid).set({
+                    username: string,
+                    email: string,
+                });
+            })
             .then(() => {
                 this.setState({ ...this.state });
                 this.props.history.push(ROUTES.HOME);
