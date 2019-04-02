@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 
-import { LogInForm } from '.';
+import { LogInForm, ILoginPageProps } from '.';
 import { SignUpLink } from '../SignUpPage';
 import { PasswordForgetLink } from '../PasswordForget';
 
-class LogInPage extends Component {
+class LogInPage extends Component<ILoginPageProps> {
+    componentDidMount() {
+        this.props.toggleNav();
+    }
+
+    componentWillUnmount() {
+        this.props.toggleNav();
+    }
+
     render() {
         return (
             <div

@@ -1,7 +1,10 @@
-export interface IPasswordForgetForm {
+export interface IPasswordForgetFormProps {
+    firebase: any;
+}
+export interface IPasswordForgetFormState {
     email: string;
     error: IPasswordForgetError;
-    firebase: any;
+    [x: number]: any;
 }
 
 export interface IPasswordForgetError {

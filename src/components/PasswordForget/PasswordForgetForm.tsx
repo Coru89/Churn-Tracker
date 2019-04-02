@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
 
-import { IPasswordForgetForm } from '.';
+import { IPasswordForgetFormProps, IPasswordForgetFormState } from '.';
 import { withFirebase } from '../Firebase';
-import { getMaxListeners } from 'cluster';
 
-class PasswordForgetFormBase extends Component<IPasswordForgetForm> {
+class PasswordForgetFormBase extends Component<
+    IPasswordForgetFormProps,
+    IPasswordForgetFormState
+> {
     constructor(props: any) {
         super(props);
 
-        // this.state = {
-        //     email: '',
-        //     error: {},
-        // };
+        this.state = {
+            email: '',
+            error: {
+                message: '',
+            },
+        };
     }
-
-    state = {
-        email: '',
-        error: {
-            message: '',
-        },
-    };
-
-    // firebase: any;
 
     onSubmit = (e: any) => {
         alert(this.state.email);
@@ -37,29 +32,12 @@ class PasswordForgetFormBase extends Component<IPasswordForgetForm> {
         e.preventDefault();
     };
 
-    // onSubmit = (e: any) => {
-    //     this.props.firebase.auth
-    //         .signInWithEmailAndPassword(this.state.email, this.state.password)
-    //         .then(() => {
-    //             this.setState({ ...this.state });
-    //             this.props.history.push(ROUTES.HOME);
-    //         })
-    //         .catch((error: any) => {
-    //             console.log(error);
-    //             this.setState({ error });
-    //         });
-
-    //     e.preventDefault();
-    // };
-
     onChange = (e: any) => {
         this.setState({ [e.target.name]: e.target.value });
     };
 
     render() {
-        const { email, error } = this.state;
-
-        // const isInvalid = email === '';
+        const { error } = this.state;
 
         return (
             <form onSubmit={this.onSubmit}>

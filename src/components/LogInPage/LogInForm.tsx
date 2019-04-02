@@ -2,25 +2,24 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { withFirebase } from '../Firebase';
-import { ILogInForm } from '.';
+import { ILogInFormProps, ILogInFormState } from '.';
 import * as ROUTES from '../../constants/routes';
 
-class LogInFormBase extends Component<ILogInForm> {
-    // constructor(props) {
-    //     super(props);
-    // }
+class LogInFormBase extends Component<ILogInFormProps, ILogInFormState> {
+    constructor(props: ILogInFormProps) {
+        super(props);
+
+        this.state = {
+            username: '',
+            email: '',
+            password: '',
+            error: {
+                message: '',
+            },
+        };
+    }
 
     // init state
-    state = {
-        username: '',
-        email: '',
-        password: '',
-        error: {
-            code: '',
-            message: '',
-        },
-    };
-
     onChange = (e: any) => {
         this.setState({ [e.target.name]: e.target.value });
     };
@@ -64,7 +63,7 @@ class LogInFormBase extends Component<ILogInForm> {
                     id="inputEmail"
                     className="form-control mb-2"
                     placeholder="Email address"
-                    value={this.props.email}
+                    value={this.state.email}
                 />
                 <label htmlFor="inputPassword" className="sr-only">
                     Password
@@ -76,7 +75,7 @@ class LogInFormBase extends Component<ILogInForm> {
                     id="inputPassword"
                     className="form-control mb-3"
                     placeholder="Password"
-                    value={this.props.password}
+                    value={this.state.password}
                 />
                 <div className="checkbox mb-3">
                     <input

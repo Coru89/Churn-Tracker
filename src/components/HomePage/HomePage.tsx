@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import CardList from '../CardList/CardList';
 
-import { withAuthorization } from '../Session';
+import { withAuthorization, AuthUserContext } from '../Session';
 
 export class HomePage extends Component<any> {
     constructor(props: any) {
@@ -10,7 +10,19 @@ export class HomePage extends Component<any> {
     }
 
     render() {
-        return this.props.authUser ? <CardList /> : null;
+        return (
+            <div>
+                {
+                    <AuthUserContext.Consumer>
+                        {authUser =>
+                            authUser ? (
+                                <CardList toggleNav={this.props.toggleNav} />
+                            ) : null
+                        }
+                    </AuthUserContext.Consumer>
+                }
+            </div>
+        );
     }
 }
 

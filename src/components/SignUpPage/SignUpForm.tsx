@@ -4,26 +4,22 @@ import { withRouter } from 'react-router-dom';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-import { ISignUpFormProps } from '.';
-import { string } from 'prop-types';
+import { ISignUpFormProps, ISignUpFormState } from '.';
 
-class SignUpFormBase extends Component<ISignUpFormProps> {
-    // DO I NEED THIS?
-    // constructor(props: ISignUpFormProps) {
-    //     super(props);
-    // }
+class SignUpFormBase extends Component<ISignUpFormProps, ISignUpFormState> {
+    constructor(props: ISignUpFormProps) {
+        super(props);
 
-    // init state
-    state = {
-        username: '',
-        email: '',
-        password: '',
-        password2: '',
-        error: {
-            code: '',
-            message: '',
-        },
-    };
+        this.state = {
+            username: '',
+            email: '',
+            password: '',
+            password2: '',
+            error: {
+                message: '',
+            },
+        };
+    }
 
     onChange = (e: any) => {
         this.setState({ [e.target.name]: e.target.value });
@@ -36,9 +32,6 @@ class SignUpFormBase extends Component<ISignUpFormProps> {
                 this.state.password,
             )
             .then((authUser: any) => {
-                // console.log(authUser);
-                // console.log(authUser.user.uid);
-
                 // Create a user in your Firebase realtime database
                 return this.props.firebase.user(authUser.user.uid).set({
                     username: this.state.username,
@@ -50,7 +43,6 @@ class SignUpFormBase extends Component<ISignUpFormProps> {
                 this.props.history.push(ROUTES.HOME);
             })
             .catch((error: any) => {
-                console.log(error);
                 this.setState({ error });
             });
 
@@ -79,28 +71,28 @@ class SignUpFormBase extends Component<ISignUpFormProps> {
             <form onSubmit={this.onSubmit}>
                 <input
                     name="username"
-                    value={this.props.username}
+                    value={this.state.username}
                     onChange={this.onChange}
                     type="text"
                     placeholder="Full Name"
                 />
                 <input
                     name="email"
-                    value={this.props.email}
+                    value={this.state.email}
                     onChange={this.onChange}
                     type="text"
                     placeholder="Email Address"
                 />
                 <input
                     name="password"
-                    value={this.props.password}
+                    value={this.state.password}
                     onChange={this.onChange}
                     type="password"
                     placeholder="Password"
                 />
                 <input
                     name="password2"
-                    value={this.props.password2}
+                    value={this.state.password2}
                     onChange={this.onChange}
                     type="password"
                     placeholder="Confirm Password"

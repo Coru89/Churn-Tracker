@@ -1,3 +1,3 @@
 export interface IAppState {
-    authUser: object | null | any;
+    hideNav: boolean;
 }

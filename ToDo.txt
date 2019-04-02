@@ -3,3 +3,4 @@ ToDo
 -Implement environment variables for sensitive info/environment info
 -fork into boiler plate
 -try to make the higher order functions TS friendly
+-how to I install SCSS and setup pre-processing? https://medium.freecodecamp.org/how-to-set-up-gulp-sass-using-the-command-line-if-youre-a-beginner-17729f53249

@@ -1,3 +1,3 @@
 export interface INavigationProps {
-    authUser: object | null;
+    hideNav: boolean;
 }

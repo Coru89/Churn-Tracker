@@ -1,12 +1,15 @@
 import { RouteComponentProps } from 'react-router-dom';
 
-export interface ILogInForm extends RouteComponentProps<any> {
-    email?: string;
-    error?: ILogInError;
-    username?: string;
-    password?: string;
-    password2?: string;
+export interface ILogInFormProps extends RouteComponentProps<any> {
     firebase: any;
+}
+
+export interface ILogInFormState {
+    email: string;
+    error: ILogInError;
+    username: string;
+    password: string;
+    [x: number]: any;
 }
 
 export interface ILogInError {
