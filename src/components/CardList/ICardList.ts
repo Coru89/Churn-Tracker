@@ -1,5 +1,7 @@
+import Firebase from '../Firebase';
+
 export interface ICardListProps {
-    firebase: any;
+    firebase: Firebase;
 }
 
 export interface ICardListState {
@@ -17,8 +19,19 @@ export interface ICardListItemProps {
 }
 
 export interface ICard {
-    date: Date;
-    name: string;
     uid: string;
+    name: string;
     type: string;
+    cardType: string;
+    opened?: any;
+    age: number;
+    creditLimit: number;
+    annualFee: number;
+    firstYearFree: boolean;
+    rewardName: string;
+    rewardAmount: number;
+    minimumSpend: number;
+    timeFrame: number;
+    estimatedValue: number;
+    daysUntilNextFee: number;
 }

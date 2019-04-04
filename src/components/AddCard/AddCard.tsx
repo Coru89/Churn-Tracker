@@ -39,6 +39,13 @@ class AddCardBase extends Component<IAddCardProps, IAddCardState> {
                     cardType: this.state.cardType,
                     opened: this.state.opened,
                     creditLimit: this.state.creditLimit,
+                    annualFee: this.state.annualFee,
+                    firstYearFree: this.state.firstYearFree,
+                    rewardName: this.state.rewardName,
+                    rewardAmount: this.state.rewardAmount,
+                    minimumSpend: this.state.minimumSpend,
+                    timeFrame: this.state.timeFrame,
+                    estimatedValue: this.state.estimatedValue,
                 })
                 .then(() => {
                     this.setState({ ...this.state });
@@ -52,6 +59,17 @@ class AddCardBase extends Component<IAddCardProps, IAddCardState> {
     }
 
     onChange = (e: any) => {
+
+        if (e.target.type && e.target.type === 'checkbox') {
+            const checkbox: HTMLInputElement | null = document.querySelector('input[type=checkbox]');
+
+            if (checkbox instanceof HTMLInputElement && checkbox.checked == true) {
+                e.target.value = "true";
+            } else {
+                e.target.value = "false";
+            }
+        }
+
         this.setState({ [e.target.name]: e.target.value });
     };
 
@@ -67,6 +85,12 @@ class AddCardBase extends Component<IAddCardProps, IAddCardState> {
 
     componentWillUnmount() {
         this.props.toggleNav();
+
+        if (this.props.firebase.auth.currentUser) {
+            const uid = this.props.firebase.auth.currentUser.uid;
+            this.props.firebase.cards(uid).off();
+        }
+
     }
     render() {
         return (
@@ -98,7 +122,7 @@ class AddCardBase extends Component<IAddCardProps, IAddCardState> {
                                     </select>
                                     <label>Opened</label>
                                     <input
-                                        name="opended"
+                                        name="opened"
                                         onChange={this.onChange}
                                         type="date"
                                         value={this.state.opened} />
@@ -109,6 +133,54 @@ class AddCardBase extends Component<IAddCardProps, IAddCardState> {
                                         type="number"
                                         value={this.state.creditLimit}
                                         step="any" />
+                                    <label>AnnualFee</label>
+                                    <input
+                                        name="annualFee"
+                                        onChange={this.onChange}
+                                        type="number"
+                                        value={this.state.annualFee}
+                                        step="any" />
+                                    <label>first Year Free?</label>
+                                    <input
+                                        type="checkbox"
+                                        name="firstYearFree"
+                                        onChange={this.onChange}
+                                    />
+                                    <label>Reward Name</label>
+                                    <input
+                                        name="rewardName"
+                                        onChange={this.onChange}
+                                        value={this.state.rewardName}
+                                        type="text"
+                                    />
+                                    <label>Reward Amount</label>
+                                    <input
+                                        name="rewardAmount"
+                                        onChange={this.onChange}
+                                        value={this.state.rewardAmount}
+                                        type="number"
+                                    />
+                                    <label>Minimum Spend</label>
+                                    <input
+                                        name="minimumSpend"
+                                        onChange={this.onChange}
+                                        value={this.state.minimumSpend}
+                                        type="number"
+                                    />
+                                    <label>Time Frame</label>
+                                    <input
+                                        name="timeFrame"
+                                        onChange={this.onChange}
+                                        value={this.state.timeFrame}
+                                        type="number"
+                                    />
+                                    <label>Estimated Value</label>
+                                    <input
+                                        name="estimatedValue"
+                                        onChange={this.onChange}
+                                        value={this.state.estimatedValue}
+                                        type="number"
+                                    />
                                     <button type="submit">Add</button>
                                 </form>
                             ) : null

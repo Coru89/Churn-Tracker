@@ -17,44 +17,54 @@ class CardList extends Component<ICardListProps, ICardListState> {
     }
 
     deleteCard = (e: any) => {
-        const userID = this.props.firebase.auth.currentUser.uid;
-        const cardID = e.target.parentElement.getAttribute('data-card-id');
-        const cardsList = this.state.cards;
+        if (this.props.firebase.auth.currentUser) {
+            const uid = this.props.firebase.auth.currentUser.uid;
 
-        this.props.firebase.removeCard(userID, cardID).remove();
+            const cardID = e.target.parentElement.getAttribute('data-card-id');
+            const cardsList = this.state.cards;
 
-        for (let i = 0; i < cardsList.length; i++) {
-            if (cardsList[i].uid === cardID) {
-                cardsList.splice(i, 1);
-            }
-        }
+            this.props.firebase.removeCard(uid, cardID).remove();
 
-        this.setState({
-            cards: cardsList,
-        });
-    };
-
-    getCards() {
-        const uid = this.props.firebase.auth.currentUser.uid;
-
-        this.props.firebase.cards(uid).on('value', (snapshot: any) => {
-            const cardsObject = snapshot.val();
-
-            if (cardsObject) {
-                const cardList = Object.keys(cardsObject).map(key => ({
-                    ...cardsObject[key],
-                    uid: key,
-                }));
-
-                this.setState({
-                    cards: cardList,
-                });
+            for (let i = 0; i < cardsList.length; i++) {
+                if (cardsList[i].uid === cardID) {
+                    cardsList.splice(i, 1);
+                }
             }
 
             this.setState({
-                loading: false,
+                cards: cardsList,
             });
-        });
+        }
+
+
+    };
+
+    getCards() {
+        if (this.props.firebase.auth.currentUser) {
+            const uid = this.props.firebase.auth.currentUser.uid;
+
+            this.props.firebase.cards(uid).on('value', (snapshot: any) => {
+                const cardsObject = snapshot.val();
+
+                if (cardsObject) {
+                    const cardList = Object.keys(cardsObject).map(key => ({
+                        ...cardsObject[key],
+                        uid: key,
+                    }));
+
+                    this.setState({
+                        cards: cardList,
+                    });
+                }
+
+                this.setState({
+                    loading: false,
+                });
+            });
+        }
+
+
+
     }
 
     componentDidMount() {
@@ -63,7 +73,12 @@ class CardList extends Component<ICardListProps, ICardListState> {
     }
 
     componentWillUnmount() {
-        this.props.firebase.cards().off();
+        if (this.props.firebase.auth.currentUser) {
+            const uid = this.props.firebase.auth.currentUser.uid;
+            this.props.firebase.cards(uid).off();
+        }
+
+
     }
 
     render() {
@@ -80,6 +95,7 @@ class CardList extends Component<ICardListProps, ICardListState> {
                         <CardListItem
                             key={card.uid}
                             deleteCard={this.deleteCard}
+                            // calculateAge={this.calculateAge}
                             card={card}
                         />
                     ))}

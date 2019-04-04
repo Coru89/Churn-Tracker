@@ -21,5 +21,4 @@ export interface IAddCardState {
     timeFrame: number;
     estimatedValue: number;
     [x: number]: any;
-
 }
