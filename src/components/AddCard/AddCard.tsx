@@ -99,7 +99,7 @@ class AddCardBase extends Component<IAddCardProps, IAddCardState> {
                     <AuthUserContext.Consumer>
                         {authUser =>
                             authUser ? (
-                                <form onSubmit={this.onSubmit}>
+                                <form className="ct__form" onSubmit={this.onSubmit}>
                                     <label>Name</label>
                                     <input
                                         name="name"
