@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import CardList from '../CardList/CardList';
+import CardPreviewList from '../CardPreview/CardPreviewList';
 
 import { withAuthorization, AuthUserContext } from '../Session';
 
@@ -16,7 +16,9 @@ export class HomePage extends Component<any> {
                     <AuthUserContext.Consumer>
                         {authUser =>
                             authUser ? (
-                                <CardList toggleNav={this.props.toggleNav} />
+                                <CardPreviewList
+                                    toggleNav={this.props.toggleNav}
+                                />
                             ) : null
                         }
                     </AuthUserContext.Consumer>

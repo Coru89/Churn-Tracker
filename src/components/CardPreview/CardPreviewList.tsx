@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
-import { ICardListState, CardListItem, ICardListProps } from '.';
+import { ICardPreviewState, ICardPreviewProps } from '.';
+import CardPreviewItem from './CardPreviewItem';
 import * as ROUTES from '../../constants/routes';
 
 import { withFirebase } from '../Firebase';
 import { Link } from 'react-router-dom';
 
-class CardList extends Component<ICardListProps, ICardListState> {
+class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
     constructor(props: any) {
         super(props);
 
@@ -35,8 +36,6 @@ class CardList extends Component<ICardListProps, ICardListState> {
                 cards: cardsList,
             });
         }
-
-
     };
 
     getCards() {
@@ -47,13 +46,13 @@ class CardList extends Component<ICardListProps, ICardListState> {
                 const cardsObject = snapshot.val();
 
                 if (cardsObject) {
-                    const cardList = Object.keys(cardsObject).map(key => ({
+                    const CardPreview = Object.keys(cardsObject).map(key => ({
                         ...cardsObject[key],
                         uid: key,
                     }));
 
                     this.setState({
-                        cards: cardList,
+                        cards: CardPreview,
                     });
                 }
 
@@ -62,9 +61,6 @@ class CardList extends Component<ICardListProps, ICardListState> {
                 });
             });
         }
-
-
-
     }
 
     componentDidMount() {
@@ -77,25 +73,26 @@ class CardList extends Component<ICardListProps, ICardListState> {
             const uid = this.props.firebase.auth.currentUser.uid;
             this.props.firebase.cards(uid).off();
         }
-
-
     }
 
     render() {
         const { cards, loading } = this.state;
 
         return (
-            <div>
-                <h1>Cards</h1>
-                <Link to={ROUTES.ADD_CARD}>Add a new card</Link>
-                <br />
+            <div className="ct__preview-item-page">
+                <Link
+                    className="ct__preview-item-page-add"
+                    to={ROUTES.ADD_CARD}
+                >
+                    Add a new card
+                </Link>
+                <h1 className="ct__preview-item-page-title">Wallet</h1>
                 {loading && <div>Loading ...</div>}
-                <ul>
+                <ul className="ct__preview-item-list">
                     {cards.map((card: any) => (
-                        <CardListItem
+                        <CardPreviewItem
                             key={card.uid}
                             deleteCard={this.deleteCard}
-                            // calculateAge={this.calculateAge}
                             card={card}
                         />
                     ))}
@@ -105,4 +102,4 @@ class CardList extends Component<ICardListProps, ICardListState> {
     }
 }
 
-export default withFirebase(CardList);
+export default withFirebase(CardPreviewList);

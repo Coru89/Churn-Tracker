@@ -10,12 +10,12 @@ $breakpoint-xxl-key: xxl !default;
 /// @nuclide Media Query Breakpoints
 /// @section Variables > Media Query
 $breakpoints: (
-	$breakpoint-xs-key: 320px,
-	$breakpoint-sm-key: 544px,
-	$breakpoint-md-key: 768px,
-	$breakpoint-lg-key: 992px,
-	$breakpoint-xl-key: 1296px,
-	$breakpoint-xxl-key: 1440px
+    $breakpoint-xs-key: 320px,
+    $breakpoint-sm-key: 544px,
+    $breakpoint-md-key: 768px,
+    $breakpoint-lg-key: 992px,
+    $breakpoint-xl-key: 1296px,
+    $breakpoint-xxl-key: 1440px,
 ) !default;
 
 $breakpoint-xs-width: map-get($breakpoints, $breakpoint-xs-key) !default;
@@ -24,7 +24,6 @@ $breakpoint-md-width: map-get($breakpoints, $breakpoint-md-key) !default;
 $breakpoint-lg-width: map-get($breakpoints, $breakpoint-lg-key) !default;
 $breakpoint-xl-width: map-get($breakpoints, $breakpoint-xl-key) !default;
 $breakpoint-xxl-width: map-get($breakpoints, $breakpoint-xxl-key) !default;
-
 
 /// @nuclide Screen Resolution HDPI
 /// @section Variables > Media Query
@@ -36,15 +35,15 @@ $screen-resolution-hdpi-plus: 3 !default;
 
 /// @nuclide HDPI Media Query
 /// @section Variables > Media Query
-$media-hdpi:
-'(-webkit-min-device-pixel-ratio: #{$screen-resolution-hdpi}),' + ' (min-resolution: (' + ($screen-resolution-hdpi * 100dpi)')),' +
-	' (min-resolution: ('($screen-resolution-hdpi * 1dppx)'))' !default;
+$media-hdpi: '(-webkit-min-device-pixel-ratio: #{$screen-resolution-hdpi}),' +
+    ' (min-resolution: (' + ($screen-resolution-hdpi * 100dpi) ')),' +
+    ' (min-resolution: (' ($screen-resolution-hdpi * 1dppx) '))' !default;
 
 /// @nuclide HDPI Plus Media Query
 /// @section Variables > Media Query
-$media-hdpi-plus:
-'(-webkit-min-device-pixel-ratio: #{$screen-resolution-hdpi-plus}),' + ' (min-resolution: ('($screen-resolution-hdpi-plus * 100dpi)')),' +
-	' (min-resolution: ('($screen-resolution-hdpi-plus * 1dppx)'))' !default;
+$media-hdpi-plus: '(-webkit-min-device-pixel-ratio: #{$screen-resolution-hdpi-plus}),' +
+    ' (min-resolution: (' ($screen-resolution-hdpi-plus * 100dpi) ')),' +
+    ' (min-resolution: (' ($screen-resolution-hdpi-plus * 1dppx) '))' !default;
 
 /// @nuclide Print Media Query
 /// @section Variables > Media query

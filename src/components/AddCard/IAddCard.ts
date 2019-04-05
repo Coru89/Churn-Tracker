@@ -9,6 +9,7 @@ export interface IAddCardProps extends RouteComponentProps<any> {
 export interface IAddCardState {
     error: string;
     name: string;
+    bank: string;
     type: string;
     cardType: string;
     opened: string | number | string[] | undefined;

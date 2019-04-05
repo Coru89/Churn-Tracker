@@ -13,7 +13,7 @@ import AddCard from '../AddCard/AddCard';
 import { IAppState } from '.';
 
 import * as ROUTES from '../../constants/routes';
-import { withAuthentication } from '../Session';
+import { withAuthentication, AuthUserContext } from '../Session';
 
 import React, { Component } from 'react';
 
@@ -23,6 +23,7 @@ class App extends Component<{}, IAppState> {
 
         this.state = {
             hideNav: false,
+            auth: false,
         };
     }
 
@@ -49,17 +50,27 @@ class App extends Component<{}, IAppState> {
                         )}
                     />
                     <Route
-                        path={ROUTES.PASSWORD_FORGET}
-                        component={PasswordForgetPage}
-                    />
-                    <Route
                         path={ROUTES.HOME}
                         render={routeProps => (
                             <HomePage {...routeProps} {...this.props} />
                         )}
                     />
                     <Route
+                        path={ROUTES.PASSWORD_FORGET}
+                        component={PasswordForgetPage}
+                    />
+                    <Route
                         path={ROUTES.ADD_CARD}
+                        render={routeProps => (
+                            <AddCard
+                                {...routeProps}
+                                {...this.props}
+                                toggleNav={this.toggleNav}
+                            />
+                        )}
+                    />
+                    <Route
+                        path={ROUTES.ITEM}
                         render={routeProps => (
                             <AddCard
                                 {...routeProps}

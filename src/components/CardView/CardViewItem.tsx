@@ -1,36 +1,29 @@
 import React, { Component } from 'react';
 
-import { ICardListItemProps } from '.';
+import { ICardViewItemProps, ICardViewItemState } from '.';
 import { addDays, differenceInCalendarDays } from 'date-fns';
 
-
-export default class CardListItem extends Component<ICardListItemProps> {
-
+export default class CardView extends Component<
+    ICardViewItemProps,
+    ICardViewItemState
+> {
     calculateAge(openedDate: any) {
         const today = new Date().toISOString().substr(0, 10);
 
-        const ageNotRounded = differenceInCalendarDays(
-            today,
-            openedDate,
-        ) / 365
+        const ageNotRounded = differenceInCalendarDays(today, openedDate) / 365;
 
         const age = Math.round(ageNotRounded * 10) / 10;
         this.props.card.age = age;
     }
 
     calculateDaysUntilNextFee(openedDate: any) {
-
         const nextFeeDate = addDays(openedDate, 365);
         const today = new Date().toISOString().substr(0, 10);
 
-        const daysNextFee = differenceInCalendarDays(
-            nextFeeDate,
-            today,
-        )
+        const daysNextFee = differenceInCalendarDays(nextFeeDate, today);
 
         this.props.card.daysUntilNextFee = daysNextFee;
     }
-
 
     componentDidMount() {
         this.calculateAge(this.props.card.opened);
@@ -57,4 +50,4 @@ export default class CardListItem extends Component<ICardListItemProps> {
     }
 }
 
-export { CardListItem };
+export { CardView };

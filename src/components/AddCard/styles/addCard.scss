@@ -1,5 +1,40 @@
 .ct__form {
-	& label {
-		font-weight: bold;	
-	}
+    margin: 0 auto;
+    max-width: 768px;
+    padding: 1rem;
+
+    & section {
+        border: solid 1px lightgrey;
+        border-radius: 5px;
+        margin-bottom: 2rem;
+        padding: 10px;
+    }
+
+    & h3 {
+        border-bottom: solid 1px lightgrey;
+    }
+
+    & label {
+        font-size: 0.75rem;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+
+    & input,
+    select {
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+        display: block;
+        margin-bottom: 0.25rem;
+        width: 100%;
+    }
+
+    & input[type='checkbox'] {
+        display: inline;
+    }
+
+    &-button-group {
+        display: flex;
+        justify-content: space-evenly;
+    }
 }

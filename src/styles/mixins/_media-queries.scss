@@ -1,5 +1,6 @@
-@import '../variables/media-queries';
+// reference/mixins/_media-queries.scss
 
+@import '../variables/media-queries';
 
 /// Only show content visible above the specified breakpoint. These breakpoints are mapped to a breakpoint map in the variables folder.
 ///
@@ -19,13 +20,12 @@
 ///      }
 ///  }
 @mixin media-min($breakpoint) {
-	@if map-has-key($breakpoints, $breakpoint) {
-		@media (min-width: map-get($breakpoints, $breakpoint)) {
-			@content;
-		}
-	}
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media (min-width: map-get($breakpoints, $breakpoint)) {
+            @content;
+        }
+    }
 }
-
 
 /// Only show content visible below the specified breakpoint. These breakpoints are mapped to a breakpoint map in the variables folder.
 ///
@@ -41,13 +41,12 @@
 ///      }
 ///  }
 @mixin media-max($breakpoint) {
-	@if map-has-key($breakpoints, $breakpoint) {
-		@media (max-width: (map-get($breakpoints, $breakpoint) - 1px)) {
-			@content;
-		}
-	}
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media (max-width: (map-get($breakpoints, $breakpoint) - 1px)) {
+            @content;
+        }
+    }
 }
-
 
 /// Only show content on high resolution screens above 150 dpi.
 ///
@@ -62,11 +61,10 @@
 ///      }
 ///  }
 @mixin media-hdpi {
-	@media #{$media-hdpi} {
-		@content;
-	}
+    @media #{$media-hdpi} {
+        @content;
+    }
 }
-
 
 /// Only show content on high resolution screens above 300 dpi.
 ///
@@ -85,11 +83,10 @@
 ///      }
 ///  }
 @mixin media-hdpi-plus {
-	@media #{$media-hdpi-plus} {
-		@content;
-	}
+    @media #{$media-hdpi-plus} {
+        @content;
+    }
 }
-
 
 /// Only show content on print.
 ///
@@ -106,7 +103,7 @@
 ///      }
 ///  }
 @mixin media-print {
-	@media #{$media-print} {
-		@content;
-	}
+    @media #{$media-print} {
+        @content;
+    }
 }

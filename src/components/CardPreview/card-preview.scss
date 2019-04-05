@@ -1,0 +1,32 @@
+.ct__preview-item {
+    border: solid 1px black;
+    border-radius: 7px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    position: relative;
+
+    &-page {
+        padding: 1rem;
+
+        &-add {
+            display: block;
+            margin-bottom: 0.5rem;
+            text-align: right;
+        }
+
+        &-title {
+            text-align: center;
+        }
+    }
+
+    &-list {
+        padding: 0;
+    }
+
+    &-logo {
+        height: auto;
+        position: absolute;
+        right: 1rem;
+        width: 15%;
+    }
+}
