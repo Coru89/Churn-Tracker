@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import mastercard from '../../styles/images/icons/mastercard.svg';
 import visa from '../../styles/images/icons/visa.svg';
 import amex from '../../styles/images/icons/amex.svg';
+import generic from '../../styles/images/icons/default.svg';
 
 import { ICardPreviewItemProps, ICardPreviewItemState } from '.';
 import { addDays, differenceInCalendarDays } from 'date-fns';
@@ -83,12 +84,20 @@ class CardPreviewItem extends Component<
 
         return (
             <div
-                onClick={this.onClick}
+                // onClick={this.onClick}
                 className="ct__preview-item"
                 data-card-id={this.props.card.uid}
                 key={this.props.card.uid}
             >
-                <div>{cardType[ct]}</div>
+                {ct ? (
+                    cardType[ct]
+                ) : (
+                    <img
+                        className="ct__preview-item-logo"
+                        src={generic}
+                        alt="defult credit cardlogo"
+                    />
+                )}
 
                 {/* <label>Name:</label> */}
                 <div className="ct__preview-item-name">
@@ -103,7 +112,7 @@ class CardPreviewItem extends Component<
                 <label>Days Until Next Fee:</label>
                 <div>{this.props.card.daysUntilNextFee} days</div>
                 <button>Edit</button>
-                {/* <button onClick={this.props.deleteCard}>Delete</button> */}
+                <button onClick={this.props.deleteCard}>Delete</button>
             </div>
         );
     }

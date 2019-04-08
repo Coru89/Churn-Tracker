@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
-import { AuthUserContext } from '../Session';
+import { AuthUserContext, withAuthentication } from '../Session';
+import { withRouter, Redirect } from 'react-router-dom';
 
+import * as ROUTES from '../../constants/routes';
 import { LogInForm, ILoginPageProps } from '.';
 import { SignUpLink } from '../SignUpPage';
 import { PasswordForgetLink } from '../PasswordForget';
@@ -19,8 +21,10 @@ class LogInPage extends Component<ILoginPageProps> {
         return (
             <React.Fragment>
                 <AuthUserContext.Consumer>
-                    {authUser =>
-                        authUser === null ? (
+                    {(authUser: any) =>
+                        authUser ? (
+                            <Redirect to={ROUTES.HOME} />
+                        ) : (
                             <div
                                 className="form-signin-wrapper"
                                 style={{
@@ -37,7 +41,7 @@ class LogInPage extends Component<ILoginPageProps> {
                                 <PasswordForgetLink />
                                 <SignUpLink />
                             </div>
-                        ) : null
+                        )
                     }
                 </AuthUserContext.Consumer>
             </React.Fragment>
@@ -45,4 +49,4 @@ class LogInPage extends Component<ILoginPageProps> {
     }
 }
 
-export default LogInPage;
+export default withAuthentication(withRouter(LogInPage));

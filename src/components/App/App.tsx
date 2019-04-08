@@ -23,7 +23,6 @@ class App extends Component<{}, IAppState> {
 
         this.state = {
             hideNav: false,
-            auth: false,
         };
     }
 

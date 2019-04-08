@@ -3,6 +3,11 @@ import { RouteComponentProps } from 'react-router-dom';
 
 export interface ICardPreviewProps {
     firebase: Firebase;
+    authUser: authUser | null;
+}
+
+export interface authUser {
+    uid: string;
 }
 
 export interface ICardPreviewState {

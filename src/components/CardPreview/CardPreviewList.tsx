@@ -4,6 +4,7 @@ import { ICardPreviewState, ICardPreviewProps } from '.';
 import CardPreviewItem from './CardPreviewItem';
 import * as ROUTES from '../../constants/routes';
 
+import { withAuthentication } from '../Session';
 import { withFirebase } from '../Firebase';
 import { Link } from 'react-router-dom';
 
@@ -18,8 +19,8 @@ class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
     }
 
     deleteCard = (e: any) => {
-        if (this.props.firebase.auth.currentUser) {
-            const uid = this.props.firebase.auth.currentUser.uid;
+        if (this.props.authUser) {
+            const uid = this.props.authUser.uid;
 
             const cardID = e.target.parentElement.getAttribute('data-card-id');
             const cardsList = this.state.cards;
@@ -39,8 +40,8 @@ class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
     };
 
     getCards() {
-        if (this.props.firebase.auth.currentUser) {
-            const uid = this.props.firebase.auth.currentUser.uid;
+        if (this.props.authUser) {
+            const uid = this.props.authUser.uid;
 
             this.props.firebase.cards(uid).on('value', (snapshot: any) => {
                 const cardsObject = snapshot.val();
@@ -69,8 +70,8 @@ class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
     }
 
     componentWillUnmount() {
-        if (this.props.firebase.auth.currentUser) {
-            const uid = this.props.firebase.auth.currentUser.uid;
+        if (this.props.authUser) {
+            const uid = this.props.authUser.uid;
             this.props.firebase.cards(uid).off();
         }
     }
@@ -102,4 +103,4 @@ class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
     }
 }
 
-export default withFirebase(CardPreviewList);
+export default withAuthentication(withFirebase(CardPreviewList));
