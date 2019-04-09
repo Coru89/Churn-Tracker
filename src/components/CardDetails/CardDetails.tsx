@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
-import { ICardViewItemProps, ICardViewItemState } from '.';
+import { ICardDetailsProps, ICardDetailsState } from '.';
 import { addDays, differenceInCalendarDays } from 'date-fns';
+import { withAuthentication } from '../Session';
 
-export default class CardView extends Component<
-    ICardViewItemProps,
-    ICardViewItemState
-> {
+class CardDetails extends Component<ICardDetailsProps, ICardDetailsState> {
     calculateAge(openedDate: any) {
         const today = new Date().toISOString().substr(0, 10);
 
@@ -24,6 +22,27 @@ export default class CardView extends Component<
 
         this.props.card.daysUntilNextFee = daysNextFee;
     }
+
+    deleteCard = (e: any) => {
+        if (this.props.authUser) {
+            const uid = this.props.authUser.uid;
+
+            const cardID = e.target.parentElement.getAttribute('data-card-id');
+            const cardsList = this.state.cards;
+
+            this.props.firebase.removeCard(uid, cardID).remove();
+
+            for (let i = 0; i < cardsList.length; i++) {
+                if (cardsList[i].uid === cardID) {
+                    cardsList.splice(i, 1);
+                }
+            }
+
+            this.setState({
+                cards: cardsList,
+            });
+        }
+    };
 
     componentDidMount() {
         this.calculateAge(this.props.card.opened);
@@ -50,4 +69,4 @@ export default class CardView extends Component<
     }
 }
 
-export { CardView };
+export default withAuthentication(CardDetails);

@@ -10,6 +10,7 @@ import HomePage from '../HomePage/HomePage';
 import AccountPage from '../AccountPage/AccountPage';
 import AdminPage from '../AdminPage/AdminPage';
 import AddCard from '../AddCard/AddCard';
+import CardDetails from '../CardDetails/CardDetails';
 import { IAppState } from '.';
 
 import * as ROUTES from '../../constants/routes';
@@ -71,11 +72,7 @@ class App extends Component<{}, IAppState> {
                     <Route
                         path={ROUTES.ITEM}
                         render={routeProps => (
-                            <AddCard
-                                {...routeProps}
-                                {...this.props}
-                                toggleNav={this.toggleNav}
-                            />
+                            <CardDetails {...routeProps} {...this.props} />
                         )}
                     />
                     <Route path={ROUTES.ACCOUNT} component={AccountPage} />

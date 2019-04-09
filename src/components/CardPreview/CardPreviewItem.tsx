@@ -23,10 +23,11 @@ class CardPreviewItem extends Component<
         };
     }
 
-    onClick() {
-        // this.props.history.push(ROUTES.ITEM);
-        console.log(this.props.history);
-    }
+    onClick = (e: any) => {
+        this.props.history.push(ROUTES.ITEM);
+
+        console.log;
+    };
 
     calculateAge(openedDate: any) {
         const today = new Date().toISOString().substr(0, 10);
@@ -84,7 +85,7 @@ class CardPreviewItem extends Component<
 
         return (
             <div
-                // onClick={this.onClick}
+                onClick={this.onClick}
                 className="ct__preview-item"
                 data-card-id={this.props.card.uid}
                 key={this.props.card.uid}

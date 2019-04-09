@@ -18,27 +18,6 @@ class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
         };
     }
 
-    deleteCard = (e: any) => {
-        if (this.props.authUser) {
-            const uid = this.props.authUser.uid;
-
-            const cardID = e.target.parentElement.getAttribute('data-card-id');
-            const cardsList = this.state.cards;
-
-            this.props.firebase.removeCard(uid, cardID).remove();
-
-            for (let i = 0; i < cardsList.length; i++) {
-                if (cardsList[i].uid === cardID) {
-                    cardsList.splice(i, 1);
-                }
-            }
-
-            this.setState({
-                cards: cardsList,
-            });
-        }
-    };
-
     getCards() {
         if (this.props.authUser) {
             const uid = this.props.authUser.uid;

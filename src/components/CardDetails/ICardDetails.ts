@@ -1,13 +1,14 @@
 import { RouteComponentProps } from 'react-router-dom';
 import Firebase from '../Firebase';
 
-export interface ICardViewItemProps extends RouteComponentProps<any> {
+export interface ICardDetailsProps extends RouteComponentProps<any> {
     firebase: Firebase;
     card: ICard;
-    deleteCard: any;
+    authUser: object | null;
+    // deleteCard: any;
 }
 
-export interface ICardViewItemState {
+export interface ICardDetailsState {
     loading: boolean;
 }
 
