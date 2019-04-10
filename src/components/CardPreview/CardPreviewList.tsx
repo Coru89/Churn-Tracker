@@ -15,6 +15,7 @@ class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
         this.state = {
             loading: false,
             cards: [],
+
         };
     }
 
@@ -46,6 +47,7 @@ class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
     componentDidMount() {
         this.setState({ loading: true });
         this.getCards();
+
     }
 
     componentWillUnmount() {
@@ -57,6 +59,9 @@ class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
 
     render() {
         const { cards, loading } = this.state;
+
+
+        const match = this.props.match;
 
         return (
             <div className="ct__preview-item-page">
@@ -70,11 +75,22 @@ class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
                 {loading && <div>Loading ...</div>}
                 <ul className="ct__preview-item-list">
                     {cards.map((card: any) => (
-                        <CardPreviewItem
-                            key={card.uid}
-                            deleteCard={this.deleteCard}
-                            card={card}
-                        />
+                        (match) ? (
+                            <Link to={{
+                                pathname: `${match.url}/${card.uid}`,
+                                state: {
+                                    card,
+                                    cards: this.state.cards
+                                }
+                            }}>
+                                <CardPreviewItem
+                                    key={card.uid}
+                                    card={card}
+                                />
+                            </Link>
+                        ) : null
+
+
                     ))}
                 </ul>
             </div>

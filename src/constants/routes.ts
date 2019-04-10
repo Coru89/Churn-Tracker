@@ -1,8 +1,9 @@
 export const ACCOUNT = '/account';
 export const ADD_CARD = '/new-card';
 export const ADMIN = '/admin';
-export const HOME = '/home';
+export const ITEMS = '/items';
 export const LOG_IN = '/';
 export const PASSWORD_FORGET = '/pw-forget';
 export const SIGN_UP = '/signup';
-export const ITEM = '/item';
+export const ITEM = '/items/:uid';
+// export const ITEM = '/item';

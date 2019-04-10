@@ -50,9 +50,16 @@ class App extends Component<{}, IAppState> {
                         )}
                     />
                     <Route
-                        path={ROUTES.HOME}
+                        exact
+                        path={ROUTES.ITEMS}
                         render={routeProps => (
                             <HomePage {...routeProps} {...this.props} />
+                        )}
+                    />
+                    <Route
+                        path={ROUTES.ITEM}
+                        render={routeProps => (
+                            <CardDetails {...routeProps} {...this.props} />
                         )}
                     />
                     <Route
@@ -69,12 +76,7 @@ class App extends Component<{}, IAppState> {
                             />
                         )}
                     />
-                    <Route
-                        path={ROUTES.ITEM}
-                        render={routeProps => (
-                            <CardDetails {...routeProps} {...this.props} />
-                        )}
-                    />
+
                     <Route path={ROUTES.ACCOUNT} component={AccountPage} />
                     <Route path={ROUTES.ADMIN} component={AdminPage} />
                 </React.Fragment>

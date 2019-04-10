@@ -30,7 +30,7 @@ class LogInFormBase extends Component<ILogInFormProps, ILogInFormState> {
             .signInWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => {
                 this.setState({ ...this.state });
-                this.props.history.push(ROUTES.HOME);
+                this.props.history.push(ROUTES.ITEMS);
             })
             .catch((error: any) => {
                 console.log(error);

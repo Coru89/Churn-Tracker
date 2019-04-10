@@ -18,6 +18,7 @@ export class HomePage extends Component<any> {
                             authUser ? (
                                 <CardPreviewList
                                     toggleNav={this.props.toggleNav}
+                                    match={this.props.match}
                                 />
                             ) : null
                         }

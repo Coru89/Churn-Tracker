@@ -32,7 +32,7 @@ const NavigationAuth = () => (
     <nav>
         <ul>
             <li>
-                <Link to={ROUTES.HOME}>Home</Link>
+                <Link to={ROUTES.ITEMS}>Home</Link>
             </li>
             <li>
                 <Link to={ROUTES.ACCOUNT}>Account</Link>

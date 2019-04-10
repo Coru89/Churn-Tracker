@@ -4,6 +4,11 @@ import { RouteComponentProps } from 'react-router-dom';
 export interface ICardPreviewProps {
     firebase: Firebase;
     authUser: authUser | null;
+    match: IMatch;
+}
+
+export interface IMatch {
+    url: string;
 }
 
 export interface authUser {
@@ -16,12 +21,11 @@ export interface ICardPreviewState {
 }
 
 export interface ICardPreviewCard {
-    uid: string;
+    uid?: string;
 }
 
 export interface ICardPreviewItemProps extends RouteComponentProps<any> {
     card: ICard;
-    deleteCard: any;
 }
 
 export interface ICardPreviewItemState {

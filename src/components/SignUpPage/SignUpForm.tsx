@@ -40,7 +40,7 @@ class SignUpFormBase extends Component<ISignUpFormProps, ISignUpFormState> {
             })
             .then(() => {
                 this.setState({ ...this.state });
-                this.props.history.push(ROUTES.HOME);
+                this.props.history.push(ROUTES.ITEMS);
             })
             .catch((error: any) => {
                 this.setState({ error });

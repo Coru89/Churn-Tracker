@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 // images
 import mastercard from '../../styles/images/icons/mastercard.svg';
@@ -14,7 +14,7 @@ import * as ROUTES from '../../constants/routes';
 class CardPreviewItem extends Component<
     ICardPreviewItemProps,
     ICardPreviewItemState
-> {
+    > {
     constructor(props: ICardPreviewItemProps) {
         super(props);
 
@@ -25,8 +25,6 @@ class CardPreviewItem extends Component<
 
     onClick = (e: any) => {
         this.props.history.push(ROUTES.ITEM);
-
-        console.log;
     };
 
     calculateAge(openedDate: any) {
@@ -81,11 +79,9 @@ class CardPreviewItem extends Component<
 
         const ct = this.state.cardType;
 
-        console.log(cardType[ct]);
-
         return (
+
             <div
-                onClick={this.onClick}
                 className="ct__preview-item"
                 data-card-id={this.props.card.uid}
                 key={this.props.card.uid}
@@ -93,12 +89,12 @@ class CardPreviewItem extends Component<
                 {ct ? (
                     cardType[ct]
                 ) : (
-                    <img
-                        className="ct__preview-item-logo"
-                        src={generic}
-                        alt="defult credit cardlogo"
-                    />
-                )}
+                        <img
+                            className="ct__preview-item-logo"
+                            src={generic}
+                            alt="defult credit cardlogo"
+                        />
+                    )}
 
                 {/* <label>Name:</label> */}
                 <div className="ct__preview-item-name">
@@ -112,8 +108,6 @@ class CardPreviewItem extends Component<
                 <div>{this.props.card.age}</div>
                 <label>Days Until Next Fee:</label>
                 <div>{this.props.card.daysUntilNextFee} days</div>
-                <button>Edit</button>
-                <button onClick={this.props.deleteCard}>Delete</button>
             </div>
         );
     }

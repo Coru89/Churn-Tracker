@@ -23,25 +23,25 @@ class LogInPage extends Component<ILoginPageProps> {
                 <AuthUserContext.Consumer>
                     {(authUser: any) =>
                         authUser ? (
-                            <Redirect to={ROUTES.HOME} />
+                            <Redirect to={ROUTES.ITEMS} />
                         ) : (
-                            <div
-                                className="form-signin-wrapper"
-                                style={{
-                                    width: '100%',
-                                    height: '100vh',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    backgroundColor: 'rgba(216, 195, 2, 0.15)',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                <LogInForm />
-                                <PasswordForgetLink />
-                                <SignUpLink />
-                            </div>
-                        )
+                                <div
+                                    className="form-signin-wrapper"
+                                    style={{
+                                        width: '100%',
+                                        height: '100vh',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        backgroundColor: 'rgba(216, 195, 2, 0.15)',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <LogInForm />
+                                    <PasswordForgetLink />
+                                    <SignUpLink />
+                                </div>
+                            )
                     }
                 </AuthUserContext.Consumer>
             </React.Fragment>
