@@ -1,14 +1,13 @@
-import app from 'firebase/app';
+import app, { messaging } from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/messaging';
 import {
     IFirebaseCredentials,
     IFirebase,
     IFirebasePassword,
     IFirebaseEmail,
 } from '.';
-
-// require('dotenv').config();
 
 const devConfig = {
     apiKey: process.env.REACT_APP_DEV_API_KEY,
@@ -33,12 +32,31 @@ const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
 class Firebase {
     auth: IFirebase['auth'];
     db: IFirebase['db'];
+    messaging: IFirebase['messaging'];
 
     constructor() {
         app.initializeApp(config);
 
         this.auth = app.auth();
         this.db = app.database();
+        this.messaging = app.messaging();
+
+        this.messaging
+            .requestPermission()
+            .then(() => {
+                console.log('have permission');
+                return this.messaging.getToken();
+            })
+            .then(token => {
+                console.log(token);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+        this.messaging.onMessage(payload => {
+            console.log('onMessage: ', payload);
+        });
     }
 
     // *** Authentication API ***
