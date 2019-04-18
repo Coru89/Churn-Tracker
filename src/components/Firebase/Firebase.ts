@@ -41,15 +41,19 @@ class Firebase {
         this.db = app.database();
         this.messaging = app.messaging();
 
+        this.messaging.onTokenRefresh(this.handleTokenRefresh);
+    }
+
+    // *** Messaging API ***
+
+    subscribeToNotifcation = () => {
         this.messaging
             .requestPermission()
             .then(() => {
                 console.log('have permission');
                 return this.messaging.getToken();
             })
-            .then(token => {
-                console.log(token);
-            })
+            .then(() => this.handleTokenRefresh())
             .catch(error => {
                 console.log(error);
             });
@@ -57,7 +61,29 @@ class Firebase {
         this.messaging.onMessage(payload => {
             console.log('onMessage: ', payload);
         });
-    }
+    };
+
+    handleTokenRefresh = () => {
+        return this.messaging.getToken().then(token => {
+            if (token && this.auth.currentUser) {
+                this.db.ref('/tokens').push({
+                    token: token,
+                    uid: this.auth.currentUser.uid,
+                });
+            }
+        });
+    };
+
+    sendNotification = (message: string) => {
+        alert('HELLO THERE');
+        const user = this.auth.currentUser;
+
+        if (user) {
+            this.db.ref(`users/${user.uid}/notifications`).push({
+                message: message,
+            });
+        }
+    };
 
     // *** Authentication API ***
 

@@ -7,7 +7,6 @@ import * as ROUTES from '../../constants/routes';
 import { ICardDetailsProps, ICardDetailsState } from '.';
 
 class CardDetails extends Component<ICardDetailsProps, ICardDetailsState> {
-
     deleteCard = () => {
         if (this.props.authUser) {
             const uid = this.props.authUser.uid;
@@ -37,7 +36,6 @@ class CardDetails extends Component<ICardDetailsProps, ICardDetailsState> {
         if (this.props.card) {
             this.props.card.age = age;
         }
-
     }
 
     calculateDaysUntilNextFee(openedDate: any) {
@@ -49,36 +47,47 @@ class CardDetails extends Component<ICardDetailsProps, ICardDetailsState> {
         if (this.props.card) {
             this.props.card.daysUntilNextFee = daysNextFee;
         }
-
     }
 
     componentDidMount() {
-
         if (this.props.card) {
             this.calculateAge(this.props.card.opened);
             this.calculateDaysUntilNextFee(this.props.card.opened);
         }
+    }
 
+    testNotification(e: any) {
+        this.props.firebase.sendNotification('Notification here');
+        e.preventDefault();
     }
 
     render() {
         return (
             // using props.location.state because props passed via router <Link/>
-            this.props.location.state.card ? (<div data-card-id={this.props.location.state.card.uid} key={this.props.location.state.card.uid}>
-                <label>Name:</label>
-                <div>{this.props.location.state.card.name}</div>
-                <label>Type</label>
-                <div>{this.props.location.state.card.type}</div>
-                <label>Opened:</label>
-                <div>{this.props.location.state.card.opened}</div>
-                <label>Age:</label>
-                <div>{this.props.location.state.card.age}</div>
-                <label>Days Until Next Fee:</label>
-                <div>{this.props.location.state.card.daysUntilNextFee} days</div>
-                <button>Edit</button>
-                <button onClick={this.deleteCard}>Delete</button>
-            </div>) : null
-
+            this.props.location.state.card ? (
+                <div
+                    data-card-id={this.props.location.state.card.uid}
+                    key={this.props.location.state.card.uid}
+                >
+                    <label>Name:</label>
+                    <div>{this.props.location.state.card.name}</div>
+                    <label>Type</label>
+                    <div>{this.props.location.state.card.type}</div>
+                    <label>Opened:</label>
+                    <div>{this.props.location.state.card.opened}</div>
+                    <label>Age:</label>
+                    <div>{this.props.location.state.card.age}</div>
+                    <label>Days Until Next Fee:</label>
+                    <div>
+                        {this.props.location.state.card.daysUntilNextFee} days
+                    </div>
+                    <button>Edit</button>
+                    <button onClick={this.deleteCard}>Delete</button>
+                    <button onClick={() => this.testNotification(event)}>
+                        test notification
+                    </button>
+                </div>
+            ) : null
         );
     }
 }
