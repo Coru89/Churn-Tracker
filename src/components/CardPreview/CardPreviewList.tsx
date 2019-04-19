@@ -48,17 +48,6 @@ class CardPreviewList extends Component<ICardPreviewProps, ICardPreviewState> {
         this.getCards();
     }
 
-    sendPush() {
-        const payload = {
-            data: {
-                title: 'New Text Message',
-                image: 'https://firebase.google.com/images/social.png',
-                message: 'Hello how are you?',
-            },
-            to: 'VALID_REGISTRATION_ID',
-        };
-    }
-
     componentWillUnmount() {
         if (this.props.authUser) {
             const uid = this.props.authUser.uid;

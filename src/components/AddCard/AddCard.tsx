@@ -31,6 +31,7 @@ class AddCardBase extends Component<IAddCardProps, IAddCardState> {
     addNewCard() {
         if (this.props.firebase.auth.currentUser) {
             const uid = this.props.firebase.auth.currentUser.uid;
+            let cardKey = null as string | null;
 
             this.props.firebase
                 .cards(uid)
@@ -49,7 +50,9 @@ class AddCardBase extends Component<IAddCardProps, IAddCardState> {
                     timeFrame: this.state.timeFrame,
                     estimatedValue: this.state.estimatedValue,
                 })
-                .then(() => {
+                .then((response) => {
+                    console.log(response);
+                    cardKey = response.key;
                     this.setState({ ...this.state });
                     this.props.history.push(ROUTES.ITEMS);
                 })
@@ -57,6 +60,23 @@ class AddCardBase extends Component<IAddCardProps, IAddCardState> {
                     console.log(error);
                     this.setState({ error });
                 });
+
+            this.props.firebase.messaging.requestPermission()
+                .then(() => {
+                    return this.props.firebase.messaging.getToken();
+                })
+                .then((token) => {
+                    console.log(token);
+                    this.props.firebase.db.ref('/notifications').push({
+                        time: this.state.opened,
+                        uid: uid,
+                        cardKey: cardKey,
+                        token: token,
+                        title: `${this.state.name} has an annual fee approaching of ${this.state.annualFee}`,
+                        body: 'body'
+                    })
+                })
+
         }
     }
 
